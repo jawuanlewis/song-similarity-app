@@ -1,0 +1,15 @@
+{
+  "name": "spotify-similar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Find songs similar to ones you pick, powered by Spotify search + Last.fm similarity.",
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:api": "pnpm --filter @spotify-similar/api dev",
+    "dev:web": "pnpm --filter @spotify-similar/web dev",
+    "build": "pnpm -r build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

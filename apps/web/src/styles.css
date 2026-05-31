@@ -1,0 +1,257 @@
+:root {
+  --bg: #121212;
+  --surface: #181818;
+  --surface-hover: #282828;
+  --border: #2a2a2a;
+  --green: #1db954;
+  --green-hover: #1ed760;
+  --text: #ffffff;
+  --text-muted: #b3b3b3;
+  --radius: 8px;
+  font-family: "Circular", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Search */
+.search {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 500px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search input:focus {
+  border-color: var(--text-muted);
+}
+
+.search input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Generic track row */
+.track-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+
+.track-row:hover {
+  background: var(--surface-hover);
+}
+
+.track-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: var(--surface-hover);
+  flex-shrink: 0;
+}
+
+.track-meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.track-name {
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artists {
+  color: var(--text-muted);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dropdown of search results */
+.dropdown {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.dropdown .track-row {
+  cursor: pointer;
+  border-radius: 0;
+}
+
+/* Selected seed chips */
+.selected {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-hover);
+  border-radius: 500px;
+  padding: 6px 8px 6px 14px;
+  font-size: 14px;
+}
+
+.chip button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.chip button:hover {
+  color: var(--text);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--green);
+  color: #000;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: 500px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--green-hover);
+  transform: scale(1.03);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Results */
+.results {
+  margin-top: 40px;
+}
+
+.results-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.embed-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.embed-wrap iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 80px;
+}
+
+.open-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.open-link:hover {
+  color: var(--green-hover);
+  text-decoration: underline;
+}
+
+/* States */
+.status {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 24px;
+}
+
+.error {
+  color: #f15e6c;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}

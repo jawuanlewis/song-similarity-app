@@ -7,9 +7,16 @@
     "dev": "pnpm --parallel -r dev",
     "dev:api": "pnpm --filter @spotify-similar/api dev",
     "dev:web": "pnpm --filter @spotify-similar/web dev",
-    "build": "pnpm -r build"
+    "build": "pnpm -r build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2"
   }
 }

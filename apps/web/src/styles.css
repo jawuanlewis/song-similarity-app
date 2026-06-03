@@ -8,7 +8,13 @@
   --text: #ffffff;
   --text-muted: #b3b3b3;
   --radius: 8px;
-  font-family: "Circular", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Circular",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 * {
@@ -185,7 +191,9 @@ body {
   border-radius: 500px;
   padding: 14px 32px;
   cursor: pointer;
-  transition: transform 0.1s, background 0.15s;
+  transition:
+    transform 0.1s,
+    background 0.15s;
 }
 
 .btn-primary:hover:not(:disabled) {

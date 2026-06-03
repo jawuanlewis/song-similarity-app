@@ -45,12 +45,21 @@ export async function getSimilarTracks(
     autocorrect: "1",
   });
 
-  const res = await fetch(`${API_BASE}?${params.toString()}`);
-  if (!res.ok) {
-    throw new Error(`Last.fm request failed: ${res.status}`);
+  let data: LastfmTrackGetSimilarResponse;
+  try {
+    const res = await fetch(`${API_BASE}?${params.toString()}`);
+    if (!res.ok) {
+      console.warn(
+        `Last.fm request failed (${res.status}) for ${seed.artist} - ${seed.title}`,
+      );
+      return [];
+    }
+    data = (await res.json()) as LastfmTrackGetSimilarResponse;
+  } catch (err) {
+    console.warn(`Last.fm request errored for ${seed.artist} - ${seed.title}:`, err);
+    return [];
   }
 
-  const data = (await res.json()) as LastfmTrackGetSimilarResponse;
   if (data.error) {
     // Unknown track etc. — treat as "no similar results" rather than failing
     // the whole request, since one bad seed shouldn't sink the others.

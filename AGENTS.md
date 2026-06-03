@@ -24,6 +24,8 @@ pnpm monorepo, two workspaces under `apps/`:
 
 - pnpm only; Node 20+. API is ESM (`"type": "module"`, NodeNext) — relative
   imports use `.js` extensions.
+- Formatting via Prettier (config in `.prettierrc.json`). Run `pnpm format`
+  before committing; `pnpm format:check` verifies in CI/locally.
 - Secrets live in `apps/api/.env` (gitignored); `.env.example` is the template.
 - Normalized `Track` shape is duplicated in `apps/api/src/spotify.ts` and
   `apps/web/src/types.ts` (no shared package yet — keep them in sync).

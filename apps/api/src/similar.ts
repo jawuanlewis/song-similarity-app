@@ -56,9 +56,7 @@ export async function getSimilarForSeeds(seeds: Seed[]): Promise<Track[]> {
 
   // Resolve each candidate to a real Spotify track. Some won't match and are
   // dropped. De-dupe by Spotify id in case fuzzy matches collide.
-  const resolved = await Promise.all(
-    ranked.map((c) => findTrack(c.artist, c.title)),
-  );
+  const resolved = await Promise.all(ranked.map((c) => findTrack(c.artist, c.title)));
 
   const seen = new Set(seedIds);
   const out: Track[] = [];

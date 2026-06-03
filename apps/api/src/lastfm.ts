@@ -49,7 +49,9 @@ export async function getSimilarTracks(
   try {
     const res = await fetch(`${API_BASE}?${params.toString()}`);
     if (!res.ok) {
-      console.warn(`Last.fm request failed (${res.status}) for ${seed.artist} - ${seed.title}`);
+      console.warn(
+        `Last.fm request failed (${res.status}) for ${seed.artist} - ${seed.title}`,
+      );
       return [];
     }
     data = (await res.json()) as LastfmTrackGetSimilarResponse;

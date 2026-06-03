@@ -99,10 +99,7 @@ export async function searchTracks(query: string, limit = 10): Promise<Track[]> 
  * Resolve a free-text "artist - title" pair (from Last.fm) to the best Spotify
  * track match. Returns null when nothing reasonable is found.
  */
-export async function findTrack(
-  artist: string,
-  title: string,
-): Promise<Track | null> {
+export async function findTrack(artist: string, title: string): Promise<Track | null> {
   const results = await searchTracks(`track:${title} artist:${artist}`, 1);
   return results[0] ?? null;
 }

@@ -1,0 +1,12 @@
+# Dependencies & build output
+node_modules/
+dist/
+build/
+
+# Lockfiles (managed by pnpm)
+pnpm-lock.yaml
+
+# Env files
+.env
+.env.*
+!.env.example

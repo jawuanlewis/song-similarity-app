@@ -22,10 +22,16 @@ app.get<{ Querystring: { q?: string } }>("/api/search", async (req, reply) => {
 app.post<{ Body: { seeds?: Seed[] } }>("/api/similar", async (req, reply) => {
   const seeds = req.body?.seeds;
   if (!Array.isArray(seeds) || seeds.length === 0) {
-    return reply.code(400).send({ error: "Body must include a non-empty 'seeds' array." });
+    return reply
+      .code(400)
+      .send({ error: "Body must include a non-empty 'seeds' array." });
   }
   const valid = seeds.filter(
-    (s) => s && typeof s.id === "string" && typeof s.name === "string" && Array.isArray(s.artists),
+    (s) =>
+      s &&
+      typeof s.id === "string" &&
+      typeof s.name === "string" &&
+      Array.isArray(s.artists),
   );
   if (valid.length === 0) {
     return reply

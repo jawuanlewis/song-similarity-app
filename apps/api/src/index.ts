@@ -1,7 +1,7 @@
 import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { config } from "./config.js";
-import { getSimilarForSeeds } from "./similar.js";
+import { getSimilarForSeeds, type Seed } from "./similar.js";
 import { searchTracks } from "./spotify.js";
 
 const app = Fastify({ logger: true });
@@ -19,12 +19,20 @@ app.get<{ Querystring: { q?: string } }>("/api/search", async (req, reply) => {
   return { tracks };
 });
 
-app.post<{ Body: { trackIds?: string[] } }>("/api/similar", async (req, reply) => {
-  const ids = req.body?.trackIds;
-  if (!Array.isArray(ids) || ids.length === 0) {
-    return reply.code(400).send({ error: "Body must include a non-empty 'trackIds' array." });
+app.post<{ Body: { seeds?: Seed[] } }>("/api/similar", async (req, reply) => {
+  const seeds = req.body?.seeds;
+  if (!Array.isArray(seeds) || seeds.length === 0) {
+    return reply.code(400).send({ error: "Body must include a non-empty 'seeds' array." });
   }
-  const tracks = await getSimilarForSeeds(ids.slice(0, 5));
+  const valid = seeds.filter(
+    (s) => s && typeof s.id === "string" && typeof s.name === "string" && Array.isArray(s.artists),
+  );
+  if (valid.length === 0) {
+    return reply
+      .code(400)
+      .send({ error: "Each seed needs 'id', 'name', and 'artists' fields." });
+  }
+  const tracks = await getSimilarForSeeds(valid.slice(0, 5));
   return { tracks };
 });
 

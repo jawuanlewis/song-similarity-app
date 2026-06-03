@@ -31,7 +31,7 @@ export function App() {
     setError(null);
     setResults(null);
     try {
-      const tracks = await getSimilar(seeds.map((s) => s.id));
+      const tracks = await getSimilar(seeds);
       setResults(tracks);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

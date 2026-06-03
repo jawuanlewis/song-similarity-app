@@ -1,5 +1,12 @@
 import { getSimilarTracks, type LastfmSimilar } from "./lastfm.js";
-import { findTrack, getTracksByIds, type Track } from "./spotify.js";
+import { findTrack, type Track } from "./spotify.js";
+
+/** Minimal seed shape sent by the frontend (a subset of Track). */
+export interface Seed {
+  id: string;
+  name: string;
+  artists: string[];
+}
 
 const PER_SEED_LIMIT = 20;
 const MAX_RESULTS = 24;
@@ -9,19 +16,17 @@ function key(artist: string, title: string): string {
 }
 
 /**
- * Given seed Spotify track ids, return similar tracks resolved back to
- * playable Spotify tracks.
+ * Given seed tracks (with metadata already supplied by the client), return
+ * similar tracks resolved back to playable Spotify tracks.
  *
- * Pipeline: seeds -> Spotify metadata -> Last.fm similar -> merge & rank
- * -> resolve each back to a Spotify track -> dedupe -> top N.
+ * Pipeline: seeds -> Last.fm similar -> merge & rank -> resolve each back to a
+ * Spotify track (via Search) -> dedupe -> top N.
  */
-export async function getSimilarForSeeds(seedIds: string[]): Promise<Track[]> {
-  const seeds = await getTracksByIds(seedIds);
+export async function getSimilarForSeeds(seeds: Seed[]): Promise<Track[]> {
   if (seeds.length === 0) return [];
 
-  const seedKeys = new Set(
-    seeds.map((s) => key(s.artists[0] ?? "", s.name)),
-  );
+  const seedKeys = new Set(seeds.map((s) => key(s.artists[0] ?? "", s.name)));
+  const seedIds = new Set(seeds.map((s) => s.id));
 
   // Gather Last.fm similar tracks for every seed in parallel.
   const perSeed = await Promise.all(

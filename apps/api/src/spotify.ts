@@ -95,15 +95,6 @@ export async function searchTracks(query: string, limit = 10): Promise<Track[]> 
   return data.tracks.items.map(normalize);
 }
 
-export async function getTracksByIds(ids: string[]): Promise<Track[]> {
-  if (ids.length === 0) return [];
-  // Spotify allows up to 50 ids per request.
-  const data = await spotifyGet<{ tracks: (SpotifyApiTrack | null)[] }>(
-    `/tracks?ids=${ids.slice(0, 50).join(",")}`,
-  );
-  return data.tracks.filter((t): t is SpotifyApiTrack => t !== null).map(normalize);
-}
-
 /**
  * Resolve a free-text "artist - title" pair (from Last.fm) to the best Spotify
  * track match. Returns null when nothing reasonable is found.

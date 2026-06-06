@@ -54,3 +54,14 @@ pnpm monorepo, two workspaces under `apps/`:
 - Seeds capped at 5; results capped at 24. Tracks that don't resolve from
   Last.fm back to Spotify are silently dropped.
 - App stays in Spotify dev mode (≤25 users); no quota-extension request for v1.
+
+## Deployment
+
+- Backend → Railway (`apps/api`), frontend → Vercel (`apps/web`), both from this
+  repo via per-project Root Directory. See README "Deployment" for settings.
+- **Fastify must bind `0.0.0.0`** (done in `index.ts`) or the container is
+  unreachable — default localhost binding 502s on Railway.
+- Frontend reaches the backend via `VITE_API_BASE_URL` (unset in dev → Vite
+  proxy; set to the Railway origin in prod). Backend allows the Vercel origin
+  via `CORS_ORIGIN`. `PORT` is injected by Railway.
+- `prepare` is `husky || true` so deploy installs don't fail without git.

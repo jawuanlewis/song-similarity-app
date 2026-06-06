@@ -43,7 +43,9 @@ app.post<{ Body: { seeds?: Seed[] } }>("/api/similar", async (req, reply) => {
 });
 
 try {
-  await app.listen({ port: config.port });
+  // host 0.0.0.0 is required in containers; the default localhost binding
+  // is unreachable from outside the container.
+  await app.listen({ port: config.port, host: "0.0.0.0" });
 } catch (err) {
   app.log.error(err);
   process.exit(1);

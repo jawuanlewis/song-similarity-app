@@ -54,3 +54,15 @@ pnpm monorepo, two workspaces under `apps/`:
 - Seeds capped at 5; results capped at 24. Tracks that don't resolve from
   Last.fm back to Spotify are silently dropped.
 - App stays in Spotify dev mode (≤25 users); no quota-extension request for v1.
+
+## Deployment
+
+- Frontend (`apps/web`) and backend (`apps/api`) deploy as separate projects
+  from this one repo, each pointed at its own subdirectory (per-project root
+  directory). Backend build `pnpm install && pnpm build`, start `pnpm start`.
+- **Fastify must bind `0.0.0.0`** (done in `index.ts`) or the container is
+  unreachable — the default localhost binding is not reachable from outside.
+- Frontend reaches the backend via `VITE_API_BASE_URL` (unset in dev → Vite
+  proxy; set to the deployed backend origin in prod). Backend allows the
+  frontend origin via `CORS_ORIGIN`; `PORT` is injected by the host.
+- `prepare` is `husky || true` so deploy installs don't fail without git.

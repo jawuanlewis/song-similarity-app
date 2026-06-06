@@ -57,11 +57,12 @@ pnpm monorepo, two workspaces under `apps/`:
 
 ## Deployment
 
-- Backend → Railway (`apps/api`), frontend → Vercel (`apps/web`), both from this
-  repo via per-project Root Directory. See README "Deployment" for settings.
+- Frontend (`apps/web`) and backend (`apps/api`) deploy as separate projects
+  from this one repo, each pointed at its own subdirectory (per-project root
+  directory). Backend build `pnpm install && pnpm build`, start `pnpm start`.
 - **Fastify must bind `0.0.0.0`** (done in `index.ts`) or the container is
-  unreachable — default localhost binding 502s on Railway.
+  unreachable — the default localhost binding is not reachable from outside.
 - Frontend reaches the backend via `VITE_API_BASE_URL` (unset in dev → Vite
-  proxy; set to the Railway origin in prod). Backend allows the Vercel origin
-  via `CORS_ORIGIN`. `PORT` is injected by Railway.
+  proxy; set to the deployed backend origin in prod). Backend allows the
+  frontend origin via `CORS_ORIGIN`; `PORT` is injected by the host.
 - `prepare` is `husky || true` so deploy installs don't fail without git.

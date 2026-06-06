@@ -2,7 +2,7 @@ import type { Track } from "./types";
 
 // In dev this is empty, so requests hit "/api/*" and the Vite proxy forwards
 // them to the local backend. In production set VITE_API_BASE_URL to the
-// deployed backend origin (e.g. https://your-api.up.railway.app).
+// deployed backend origin.
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
 
 async function jsonOrThrow<T>(res: Response): Promise<T> {

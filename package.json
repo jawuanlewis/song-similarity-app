@@ -1,12 +1,12 @@
 {
-  "name": "spotify-similar",
+  "name": "song-similarity-app",
   "version": "0.1.0",
   "private": true,
   "description": "Find songs similar to ones you pick, powered by Spotify search + Last.fm similarity.",
   "scripts": {
     "dev": "pnpm --parallel -r dev",
-    "dev:api": "pnpm --filter @spotify-similar/api dev",
-    "dev:web": "pnpm --filter @spotify-similar/web dev",
+    "dev:api": "pnpm --filter @song-similarity-app/api dev",
+    "dev:web": "pnpm --filter @song-similarity-app/web dev",
     "build": "pnpm -r build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

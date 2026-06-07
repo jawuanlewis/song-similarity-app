@@ -6,6 +6,7 @@ import { SeedChips } from "./components/SeedChips";
 import type { Track } from "./types";
 
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const MAX_SEEDS = 5;
 
@@ -81,6 +82,7 @@ export function App() {
         </section>
       </div>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }

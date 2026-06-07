@@ -1,4 +1,4 @@
-# Project Context - `spotify-similar`
+# Project Context - `song-similarity-app`
 
 A "find similar songs" web tool: search Spotify, pick one or more seed tracks,
 get a ranked list of similar tracks rendered as Spotify embed players.

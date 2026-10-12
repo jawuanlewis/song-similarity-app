@@ -29,6 +29,9 @@ pnpm monorepo, two workspaces under `apps/`:
 - Husky pre-commit hook (`.husky/pre-commit`) blocks commits unless
   `pnpm format:check` and `pnpm build` both pass. Installed via the `prepare`
   script on `pnpm install`. Bypass in emergencies with `git commit --no-verify`.
+- Static assets (favicon set, `site.webmanifest`) live in `apps/web/public/` and
+  are served from the site root. Prettier checks `.webmanifest` as JSON, so
+  generator output must be formatted or it fails the pre-commit hook.
 - Secrets live in `apps/api/.env` (gitignored); `.env.example` is the template.
 - Normalized `Track` shape is duplicated in `apps/api/src/spotify.ts` and
   `apps/web/src/types.ts` (no shared package yet — keep them in sync).

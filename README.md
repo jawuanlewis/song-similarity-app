@@ -47,3 +47,11 @@ so there's nothing else to configure.
   (PKCE) flow.
 - Last.fm → Spotify matching is fuzzy; the occasional track won't resolve and
   is dropped from results.
+
+## Credits
+
+- Favicon generated with [favicon.io](https://favicon.io) from the
+  [Twemoji](https://github.com/twitter/twemoji) musical keyboard graphic
+  ([`1f3b9.svg`](https://github.com/twitter/twemoji/blob/v14.0.2/assets/svg/1f3b9.svg)),
+  Copyright 2020 Twitter, Inc and other contributors, licensed under
+  [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
